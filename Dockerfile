@@ -1,6 +1,7 @@
 FROM node:18-alpine AS base
-RUN corepack enable && corepack prepare pnpm@latest --activate 
 RUN apk add --no-cache libc6-compat
+
+RUN npm i -g pnpm
 
 FROM base AS deps
 WORKDIR /app
