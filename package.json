@@ -5,13 +5,13 @@
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "dev:watch": "nodemon -e js --exec \"ts-node-esm --experimentalSpecifierResolution node ./dist/server.js\"",
+    "dev:watch": "nodemon -e js --exec \"ts-node-esm -r dotenv/config --experimentalSpecifierResolution node ./dist/server.js\"",
     "build": "swc src -d dist",
     "build:watch": "swc src -w -d dist",
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --ext .ts src --fix",
     "start": "concurrently \"pnpm build:watch\" \"pnpm dev:watch\" \"pnpm lint\"",
-    "start:prd": "ts-node-esm --experimentalSpecifierResolution node ./server.js",
+    "start:prd": "ts-node-esm --experimentalSpecifierResolution node ./dist/server.js",
     "typeorm": "typeorm-ts-node-esm",
     "clean": "rm -rf dist"
   },
@@ -35,7 +35,6 @@
     "eslint": "^8.35.0",
     "nodemon": "^2.0.21",
     "reflect-metadata": "^0.1.13",
-    "resolve": "^1.22.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },
