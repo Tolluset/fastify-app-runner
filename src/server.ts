@@ -11,6 +11,7 @@ const fastify = Fastify({
 fastify.register(mysql);
 fastify.register(HealthCheck);
 fastify.register(Fruit);
+
 const start = async () => {
   try {
     await fastify.listen({ host: SERVER.HOST, port: SERVER.PORT });

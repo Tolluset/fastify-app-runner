@@ -12,7 +12,7 @@ services:
     networks:
       - db-net
     env_file:
-      - .env
+      - .env.local
     depends_on:
       - db
 
@@ -27,7 +27,7 @@ services:
     networks:
       - db-net
     env_file:
-      - .env
+      - .env.local
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}

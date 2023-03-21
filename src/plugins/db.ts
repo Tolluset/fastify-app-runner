@@ -36,7 +36,7 @@ async function mysql(fastify: FastifyInstance) {
       quantity: 2,
     },
     {
-      type: "carrot",
+      type: "coconut",
       quantity: 1,
     },
   ]);

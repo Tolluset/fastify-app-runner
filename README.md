@@ -2,6 +2,8 @@
 
 Fastify 앱을 AWS App Runner에 올리고 AWS Aurora와 연결하는 예시입니다.
 
+DB는 AWS RDS MySQL을 사용합니다.
+
 ## How to start
 
 ### 셋업 준비
@@ -33,11 +35,10 @@ AWS_ACCOUNT_ID=필수
 
 docker compose 를 사용하여 개발환경을 설정합니다.
 
-로컬 DB를 사용하는 경우
+로컬 DB를 사용하는 경우 따로 `.env.local` 파일로 분리해주세요.
 
 ```bash
-docker compose build
-docker compose start
+./scripts/compose-start.sh
 ```
 
 AWS RDS를 생성하여 연결한 경우
@@ -48,8 +49,9 @@ AWS RDS를 생성하여 연결한 경우
 
 ### Production
 
-Amazone ECR로 이미지를 빌드하고 푸쉬합니다. `.env` 파일에 AWS_ACCOOUNT_ID가 설정되어 있어야합니다.
+Amazon ECR로 이미지를 빌드하고 푸쉬합니다. `.env` 파일에 AWS_ACCOUNT_ID가 설정되어 있어야합니다.
 
 ```bash
+./scripts/ecr-login.sh
 ./scripts/ecr-push.sh
 ```

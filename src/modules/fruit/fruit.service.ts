@@ -1,5 +1,5 @@
 import type { FastifyInstance } from "fastify";
-import { PutDto } from "./fruit.dto";
+import { PatchFruitBody, PatchFruitParams } from "./fruit.type";
 import FruitRepository from "./fruit.repository";
 
 const FruitService = async (fastify: FastifyInstance) => {
@@ -9,11 +9,15 @@ const FruitService = async (fastify: FastifyInstance) => {
     findOneBy: async (id: number) =>
       await fruitRepository.findOneBy({ id: id }),
 
-    update: async ({ id, type, quantity }: PutDto) =>
-      await fruitRepository.update(id, {
-        type: type,
-        quantity: quantity,
-      }),
+    update: async ({ id, action }: PatchFruitBody & PatchFruitParams) => {
+      const variance = action === "increment" ? "+ 1" : "- 1";
+
+      return await fruitRepository.update(id, {
+        quantity: () => `quantity ${variance}`,
+      });
+    },
+
+    findAll: async () => await fruitRepository.find(),
   };
 };
 
