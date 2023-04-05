@@ -11,12 +11,7 @@ DB는 AWS RDS MySQL을 사용합니다.
 디펜던시를 설치해주세요.
 `pnpm i`
 
-스크립트에 권한을 설정합니다.
-`chmod -R +x scripts`
-
-`.env` 파일을 생성해주세요.
-
-모두 작성해야 할 필요는 없습니다. `src/constants/env.ts`를 참고 해주세요.
+`.env.local` 파일과 `.env.prd` 파일을 아래와 같이 생성해주세요.
 
 ```txt
 SERVER_HOST=
@@ -24,34 +19,32 @@ SERVER_PORT=
 
 DB_HOST=
 DB_PORT=
-DB_USERNAME=필수
-DB_PASSWORD=필수
+DB_USERNAME=
+DB_PASSWORD=
 DB_DATABASE=
 
-AWS_ACCOUNT_ID=필수
+AWS_ACCOUNT_ID=
+AWS_REGION=       # ap-northeast-1 서울 리전
 ```
 
 ### 로컬 환경
 
 docker compose 를 사용하여 개발환경을 설정합니다.
 
-로컬 DB를 사용하는 경우 따로 `.env.local` 파일로 분리해주세요.
-
 ```bash
-./scripts/compose-start.sh
+ENV=local make compose-start
 ```
 
-AWS RDS를 생성하여 연결한 경우
+AWS RDS를 생성하여 연결한 경우 사용합니다.
 
 ```bash
-./scripts/docker-start.sh
+ENV=prd make docker-start
 ```
 
-### Production
+### 배포
 
-Amazon ECR로 이미지를 빌드하고 푸쉬합니다. `.env` 파일에 AWS_ACCOUNT_ID가 설정되어 있어야합니다.
+Amazon ECR로 이미지를 빌드하고 푸쉬합니다.
 
 ```bash
-./scripts/ecr-login.sh
-./scripts/ecr-push.sh
+ENV=prd make ecr-push
 ```
