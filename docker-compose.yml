@@ -28,9 +28,6 @@ services:
       - db-net
     env_file:
       - .env.local
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
 
 networks:
   db-net:

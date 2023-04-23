@@ -14,17 +14,33 @@ DB는 AWS RDS MySQL을 사용합니다.
 `.env.local` 파일과 `.env.prd` 파일을 아래와 같이 생성해주세요.
 
 ```txt
-SERVER_HOST=
-SERVER_PORT=
+ex) .env.local
 
-DB_HOST=
-DB_PORT=
-DB_USERNAME=
-DB_PASSWORD=
-DB_DATABASE=
+SERVER_HOST=0.0.0.0  # compose가 아니라 단일 도커의 경우 localhost
+SERVER_PORT=8080
 
-AWS_ACCOUNT_ID=
-AWS_REGION=       # ap-northeast-1 서울 리전
+DB_HOST=mysql
+DB_PORT=3306
+DB_USERNAME={username}
+DB_PASSWORD={password}
+DB_DATABASE={database}
+
+
+---
+
+ex) .env.prd
+
+SERVER_HOST=0.0.0.0
+SERVER_PORT=8080
+
+DB_HOST=mysql
+DB_PORT=3306
+DB_USERNAME={username}
+DB_PASSWORD={password}
+DB_DATABASE={database}
+
+AWS_ACCOUNT_ID=123456789
+AWS_REGION=ap-northeast-1
 ```
 
 ### 로컬 환경
@@ -32,13 +48,7 @@ AWS_REGION=       # ap-northeast-1 서울 리전
 docker compose 를 사용하여 개발환경을 설정합니다.
 
 ```bash
-ENV=local make compose-start
-```
-
-AWS RDS를 생성하여 연결한 경우 사용합니다.
-
-```bash
-ENV=prd make docker-start
+make compose-start
 ```
 
 ### 배포
